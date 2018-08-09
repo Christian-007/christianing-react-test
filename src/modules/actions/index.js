@@ -21,11 +21,35 @@ export const getFilmDetail = (filmIndex) => {
     .then(response => {
       console.log('response', response);
       dispatch(setFilmDetail(response.data));
+      dispatch(getBatchDetails(response.data.characters));
     })
     .catch(error => {
       console.log('error', error);
     });
     
+  }
+}
+
+export const getBatchDetails = (batchDetails) => {
+  console.log('batchDetails: ', batchDetails);
+  return dispatch => {
+    batchDetails.map(url => {
+      axios.get(url)
+      .then(response => {
+        console.log('response', response);
+        // resolve(response.data.name);
+        dispatch(setBatchFields('characters', response));
+      })
+      .catch(error => {
+        console.log('error', error);
+        // reject(error);
+      });
+    })
+    // promiseFetching(batchDetails)
+    // .then(response => {
+    //   console.log('response of characters:', response);
+    //   dispatch(setBatchFields(response));
+    // })
   }
 }
 
@@ -35,7 +59,33 @@ export const putPageLocation = (page) => {
   }
 }
 
-export const setPageLocation = (page) => {
+const promiseFetching = (batchDetails) => {
+  return new Promise((resolve, reject) => {
+    batchDetails.map(url => {
+      axios.get(url)
+      .then(response => {
+        console.log('response', response);
+        resolve(response.data.name);
+      })
+      .catch(error => {
+        console.log('error', error);
+        reject(error);
+      });
+    })
+  });
+};
+
+const setBatchFields = (fieldName, fieldDetails) => {
+  return {
+    type: t.GET_BATCH_DETAILS,
+    fieldName,
+    payload: {
+      fieldDetails
+    }
+  };
+}
+
+const setPageLocation = (page) => {
   return {
     type: t.SET_PAGE_LOCATION,
     payload: {
@@ -44,8 +94,7 @@ export const setPageLocation = (page) => {
   };
 }
 
-
-export const setFilmDetail = (filmDetail) => {
+const setFilmDetail = (filmDetail) => {
   return {
     type: t.GET_FILM_DETAIL,
     payload: {
@@ -54,7 +103,7 @@ export const setFilmDetail = (filmDetail) => {
   };
 }
 
-export const setFilms = (films) => {
+const setFilms = (films) => {
   return {
     type: t.FETCH_FILMS,
     payload: {

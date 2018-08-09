@@ -3,6 +3,9 @@ import * as t from '../types';
 const initState = {
   films: [],
   filmDetail: {},
+  characters: [],
+  planets: [],
+  starships: [],
 }
 
 const filmReducers = (state = initState, action) => {
@@ -18,6 +21,15 @@ const filmReducers = (state = initState, action) => {
       return {
         ...state, 
         filmDetail: action.payload.filmDetail
+      }
+
+    case t.GET_BATCH_DETAILS :
+      return {
+        ...state, 
+        [action.fieldName]: [
+          ...state[action.fieldName],
+          action.payload.fieldDetails,
+        ]
       }
     
     default :

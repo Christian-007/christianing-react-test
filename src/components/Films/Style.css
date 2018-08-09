@@ -4,3 +4,23 @@
   padding: 20px;
   margin-bottom: 20px;
 }
+
+.film-episode {
+  font-size: 20px;
+  color: #171717;
+  font-weight: 900;
+}
+
+.film-title {
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.btn-view {
+  background: #3673df;
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: 2px;
+}

@@ -1,3 +1,4 @@
 export const FETCH_FILMS = 'FETCH_FILMS';
 export const GET_FILM_DETAIL = 'GET_FILM_DETAIL';
 export const SET_PAGE_LOCATION = 'SET_PAGE_LOCATION';
+export const GET_BATCH_DETAILS = 'GET_BATCH_DETAILS';

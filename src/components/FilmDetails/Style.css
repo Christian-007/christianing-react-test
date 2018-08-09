@@ -1,0 +1,21 @@
+#film-details {
+  padding-top: 90px;
+}
+
+#film-details .film-details-box {
+  background: #fff;
+  padding: 15px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, .07);
+}
+
+#film-details .film-details-box p {
+  margin: 0;
+}
+
+#film-details .film-episode {
+  font-size: 30px;
+}
+
+.text-detail {
+  font-weight: 300;
+}

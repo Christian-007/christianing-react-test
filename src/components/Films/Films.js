@@ -15,7 +15,7 @@ class Films extends Component {
     return this.props.filmReducers.films.map((film, index) => {
       filmIndex = film.url.substring(27, film.url.length-1);
       return (
-        <Col xs={12} md={4} key={index}>
+        <Col xs={12} md={6} key={index}>
           <BoxFilm data={film} filmId={filmIndex}/>
         </Col>
       )
