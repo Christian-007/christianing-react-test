@@ -19,3 +19,7 @@
 .text-detail {
   font-weight: 300;
 }
+
+.btn-default {
+  background-image: none;
+}

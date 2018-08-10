@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Style.css';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 

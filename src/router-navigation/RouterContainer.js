@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { putPageLocation } from '../modules/actions'
 import Home from '../components/Home/Home';
 import FilmPath from './FilmPath';
+import NotFoundPage from '../components/NotFoundPage';
 
 class RouterContainer extends Component {
   componentWillMount() {
@@ -26,6 +27,7 @@ class RouterContainer extends Component {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/films' component={FilmPath} />
+        <Route component={NotFoundPage} />
       </Switch>
     );
   }

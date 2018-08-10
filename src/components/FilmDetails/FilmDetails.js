@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFilmDetail, getBatchDetails } from '../../modules/actions';
-import './Style.css'
+import { getFilmDetail, getBatchDetails, unmountDetails } from '../../modules/actions';
+import { Button } from 'react-bootstrap';
+import './Style.css';
+import FilmDetailsLoader from '../ComponentLoaders/FilmDetailLoader';
+import FontAwesome from 'react-fontawesome';
+import { withRouter } from 'react-router-dom';
+import NotFoundPage from '../NotFoundPage';
 
 class FilmDetails extends Component {
   componentDidMount() {
     const filmIndex = this.props.match.params.number;
-    console.log('params: ' + filmIndex);
     this.props.getFilmDetail(filmIndex);
+  }
+
+  componentWillUnmount() {
+    this.props.unmountDetails();
   }
 
   renderFilmDetail = () => {
     const details = this.props.filmReducers.filmDetail;
-    // const characters = this.props.filmReducers.filmDetail.characters;
-    // this.props.getBatchDetails(characters);
     return (
       <div className="film-details-box">
         <p className="film-episode">
@@ -26,18 +32,62 @@ class FilmDetails extends Component {
         <p>Producer: <span className="text-detail">{details.producer}</span></p>
         <br/>
         <p>{details.opening_crawl}</p>
-        <br/>
-        <p>Characters:</p>
-        <p></p>
       </div>
     )
   }
 
+  renderElement = (dataType) => {
+    const arrayData = this.props.filmReducers[dataType.toLowerCase()].data.map((character, index) => {
+      return (
+        <p key={index}>{character.name}</p>
+      )
+    });
+    return (
+      <div className="film-details-box">
+        <p className="film-episode">{dataType}</p>
+        <hr />
+        {arrayData.map(element => {
+          return element
+        })}
+      </div>
+    )
+  }
+
+  renderLoader = () => {
+    return (
+      <div>
+        <div className="film-details-box">
+          <FilmDetailsLoader />
+        </div>
+      </div>
+    )
+  }
+
+  clickBack = () => {
+    this.props.history.push('/films');
+  }
+
   render() {
+    if (this.props.filmReducers.fetchError) {
+      return <NotFoundPage />
+    }
     return (
       <div id="film-details" className="section-wrapper">
         <div className="container">
-          {this.renderFilmDetail()}
+          <Button style={{marginBottom: 10}} onClick={this.clickBack}>
+            <FontAwesome
+              name='arrow-left'
+              style={{marginRight: 5}}
+            />
+          Back
+          </Button>
+          {Object.keys(this.props.filmReducers.filmDetail).length === 0 ? this.renderLoader() : this.renderFilmDetail()}
+          <br />
+          {this.props.filmReducers.characters.isDoneFetching ? this.renderElement('Characters') : this.renderLoader() }
+          <br />
+          {this.props.filmReducers.planets.isDoneFetching ? this.renderElement('Planets') : this.renderLoader() }
+          <br />
+          {this.props.filmReducers.starships.isDoneFetching ? this.renderElement('Starships') : this.renderLoader() }
         </div>
       </div>
     )
@@ -50,7 +100,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = ({
   getFilmDetail: getFilmDetail,
-  getBatchDetails: getBatchDetails
+  getBatchDetails: getBatchDetails,
+  unmountDetails: unmountDetails
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilmDetails);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FilmDetails));
