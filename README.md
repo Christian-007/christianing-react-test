@@ -52,9 +52,9 @@ $ npm run build
 
 ### 2. Install a static server
 You can skip this step if you have installed a static server. Otherwise, run the following command:
-`
+```
 $ npm install -g serve
-`
+```
 This will install a `serve` package globally.
 
 *Note for UNIX user: if you encounter permission problem, use the command `sudo npm install -g serve` to install the package as an Admin.*
