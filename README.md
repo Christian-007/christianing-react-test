@@ -5,7 +5,7 @@ This project is created using ReactJS and uses data from `https://swapi.co/` API
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
 - [Installing and running the project](#installing-and-running-the-project)
-- [Running build version on a static server](running-build-version-on-a-static-server)
+- [Running build version on a static server](#running-build-version-on-a-static-server)
 - [Methods of Implementations](#methods-of-implementations)
 
 ## Getting Started
