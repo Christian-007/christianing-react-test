@@ -1,6 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
-import './Style.css';
+import '../Style.css';
 import { Link } from 'react-router-dom';
 
 class BoxFilm extends React.PureComponent {  

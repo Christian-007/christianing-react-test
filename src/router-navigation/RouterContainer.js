@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { putPageLocation } from '../modules/actions'
-import Home from '../components/Home/Home';
+import Home from '../pages/Home/Home';
 import FilmPath from './FilmPath';
-import NotFoundPage from '../components/NotFoundPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 class RouterContainer extends Component {
   componentWillMount() {

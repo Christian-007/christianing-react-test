@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getFilmDetail, getBatchDetails, unmountDetails } from '../../modules/actions';
 import { Button } from 'react-bootstrap';
 import './Style.css';
-import FilmDetailsLoader from '../ComponentLoaders/FilmDetailLoader';
+import FilmDetailsLoader from '../../common/ComponentLoaders/FilmDetailLoader';
 import FontAwesome from 'react-fontawesome';
 import { withRouter } from 'react-router-dom';
 import NotFoundPage from '../NotFoundPage';
