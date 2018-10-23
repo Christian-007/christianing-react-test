@@ -19,19 +19,32 @@ const initState = {
     data: []
   },
   fetchError: false,
+  ajaxAction: [],
 }
 
 const filmReducers = (state = initState, action) => {
   switch(action.type) {
+    case t.LOADING_CONTENT:
+      return {
+        ...state,
+        ajaxAction: state.ajaxAction.concat(action.id)
+      }
     
     case t.FETCH_FILMS :
-      return {
-        ...state, 
-        films: {
-          isDoneFetching: true,
-          data: action.payload.films
+      if(state.ajaxAction.includes(action.id)) {
+        console.log('NO INTERRUPTION');
+        return {
+          ...state, 
+          films: {
+            isDoneFetching: true,
+            data: action.payload.films
+          }
         }
       }
+
+      console.log('INTERRUPTED');
+      return state;
+      
 
     case t.UNMOUNT_FILM_DETAILS :
       return {
@@ -59,6 +72,7 @@ const filmReducers = (state = initState, action) => {
           isDoneFetching: false,
         },
         fetchError: false,
+        ajaxAction: [] // CANCEL ALL FETCH OPERATION
       }
     
     case t.ADD_ERROR:

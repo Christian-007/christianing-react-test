@@ -2,9 +2,16 @@
 import * as t from '../types';
 import axios from 'axios';
 
+const actionId = Math.random();
+
 // Fetch films on '/films' route
 export const fetchFilms = () => {
   return dispatch => {
+    dispatch({
+      type: t.LOADING_CONTENT,
+      id: actionId
+    })
+
     axios.get('https://swapi.co/api/films/')
     .then(response => {
       dispatch(setFilms(response.data.results));
@@ -118,6 +125,7 @@ const setFilms = (films) => {
     type: t.FETCH_FILMS,
     payload: {
       films
-    }
+    },
+    id: actionId,
   };
 }
